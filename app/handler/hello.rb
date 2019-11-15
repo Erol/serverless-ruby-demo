@@ -8,8 +8,7 @@ module Handler
         body: JSON.pretty_generate(
           message: 'Hello World',
           event: event,
-          context: context,
-          env: Hash(ENV)
+          context: context
         )
       }
     end
