@@ -1,0 +1,29 @@
+version: '3.4'
+
+services:
+  serverless:
+    build:
+      context: .
+      target: serverless
+    environment:
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - DATABASE_NAME
+      - DATABASE_REGION
+      - DATABASE_RESOURCE_ARN
+      - DATABASE_SECRET_ARN
+      - LAMBDA_REGION
+      - LAMBDA_STAGE
+    volumes:
+      - .:/opt/app
+  lambda:
+    environment:
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - DATABASE_NAME
+      - DATABASE_REGION
+      - DATABASE_RESOURCE_ARN
+      - DATABASE_SECRET_ARN
+    image: lambci/lambda:build-ruby2.5
+    volumes:
+      - .:/var/task:delegated
